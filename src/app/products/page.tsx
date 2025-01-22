@@ -8,6 +8,14 @@ interface ProductsProps {
   products: Product[];
 }
 
+const prouctsKeyWords = products.map((product) => product.name);
+
+export const metadata = {
+  title: "Products",
+  description: "Products page",
+  keywords: ["products", "tienda", "tienda online", ...prouctsKeyWords],
+};
+
 const Products: FC<ProductsProps> = () => {
   return (
     <section className="bg-white py-8 px-4">

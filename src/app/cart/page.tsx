@@ -7,6 +7,11 @@ interface CartProps {
   items: Product[];
 }
 
+export const metadata = {
+  title: "Cart",
+  description: "Ver y manejar items en carrito",
+};
+
 const Cart: FC<CartProps> = ({ items = [] }) => {
   if (items.length === 0) {
     return (
