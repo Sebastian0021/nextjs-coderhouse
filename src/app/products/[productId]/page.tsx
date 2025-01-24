@@ -1,10 +1,11 @@
 import React from "react";
-import { products } from "../../../mock/mock";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = ({ params }: { params: { productId: string } }) => {
-  const product = products.find((p) => p.id === params.productId);
+const page = async ({ params }: { params: { productId: string } }) => {
+  const product = await fetch(
+    `http://localhost:3000/api/products/${params.productId}`
+  ).then((res) => res.json());
 
   if (!product) {
     return <div className="text-center text-3xl">Product not found</div>;

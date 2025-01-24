@@ -1,8 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Product } from "@/types/product";
+// import { Product } from "@/types/product";
 
-const Products: React.FC<{ products: Product[] }> = ({ products }) => {
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+}
+
+const Products = async () => {
+  const products = await fetch("http://localhost:3000/api/products").then(
+    (res) => res.json() as Promise<Product[]>
+  );
+
   return (
     <section className="bg-white py-8 px-4">
       <h2 className="text-3xl font-bold mb-4">Products</h2>
