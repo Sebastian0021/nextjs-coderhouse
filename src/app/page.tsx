@@ -1,6 +1,7 @@
 // "use client";
 import Hero from "./components/Hero";
 import Products from "./components/Products";
+import { Product } from "@/types/product";
 // import { db } from "@/firebase/config";
 // import { collection, addDoc } from "firebase/firestore";
 
@@ -10,11 +11,14 @@ export const metadata = {
   keywords: ["home", "tienda", "tienda online"],
 };
 
-export default function Home() {
+export default async function Home() {
+  const products = await fetch("http://localhost:3000/api/products").then(
+    (res) => res.json() as Promise<Product[]>
+  );
   return (
     <main>
       <Hero />
-      <Products />
+      <Products products={products} />
       {/* <button
         onClick={() => {
           const collectionRef = collection(db, "products");

@@ -2,9 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = async ({ params }: { params: { productId: string } }) => {
+const page = async ({
+  params,
+}: {
+  params: Promise<{ productId: string; category: string }>;
+}) => {
+  const { productId, category } = await params;
+
   const product = await fetch(
-    `http://localhost:3000/api/products/${params.productId}`
+    `http://localhost:3000/api/products/${category}/${productId}`
   ).then((res) => res.json());
 
   if (!product) {

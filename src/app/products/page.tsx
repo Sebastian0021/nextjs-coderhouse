@@ -1,16 +1,27 @@
-import { products } from "../../mock/mock";
 import Products from "../components/Products";
-
-const prouctsKeyWords = products.map((product) => product.name);
+import { Product } from "@/types/product";
+import ProductsAside from "../components/ProductsAside";
+// const prouctsKeyWords = products.map((product) => product.name);
 
 export const metadata = {
   title: "Products",
   description: "Products page",
-  keywords: ["products", "tienda", "tienda online", ...prouctsKeyWords],
+  keywords: ["products", "tienda", "tienda online"],
 };
 
-const ProductsPage = () => {
-  return <Products products={products} />;
+const ProductsPage = async () => {
+  const products = await fetch("http://localhost:3000/api/products").then(
+    (res) => res.json() as Promise<Product[]>
+  );
+
+  return (
+    <div className="container mx-auto p-4 grid grid-cols-12 gap-4">
+      <ProductsAside currentCategory={"todos"} />
+      <div className="col-span-9">
+        <Products products={products} />
+      </div>
+    </div>
+  );
 };
 
 export default ProductsPage;
