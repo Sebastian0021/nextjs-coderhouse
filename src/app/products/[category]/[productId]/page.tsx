@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
+import QtySelector from "@/app/components/QtySelector";
 
 const page = async ({
   params,
@@ -29,11 +30,9 @@ const page = async ({
       />
       <p className="text-lg my-4">{product.description}</p>
       <p className="text-2xl font-bold">${product.price}</p>
-      <Link href={`/cart?productId=${product.id}`}>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Add to cart
-        </button>
-      </Link>
+      {/* <Link href={`/cart?productId=${product.id}`}> */}
+      <QtySelector product={product} />
+      {/* </Link> */}
     </div>
   );
 };

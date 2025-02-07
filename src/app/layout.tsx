@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { Roboto } from "next/font/google";
+import { CartProvider } from "./context/CartContext";
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={roboto.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
