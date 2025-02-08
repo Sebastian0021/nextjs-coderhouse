@@ -3,6 +3,7 @@ import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { Roboto } from "next/font/google";
 import { CartProvider } from "./context/CartContext";
+import AuthProvider from "./context/AuthContext";
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={roboto.className}>
-        <CartProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

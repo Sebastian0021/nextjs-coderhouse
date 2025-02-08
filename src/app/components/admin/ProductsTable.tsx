@@ -1,35 +1,17 @@
-// "use client";
-// import { useState, useEffect } from "react";
-// import { db } from "@/firebase/config";
-// import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import { Product } from "@/types/product";
 import Image from "next/image";
-import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
+import { RiEdit2Line } from "react-icons/ri";
+import Link from "next/link";
+import DeleteProductBtn from "./DeleteProductBtn";
 
 export default async function ProductsTable() {
-  //   const [products, setProducts] = useState<Product[]>([]);
-  //   const [search, setSearch] = useState("");
-
-  //   useEffect(() => {
-  //     const getProducts = async () => {
-  //       const q = query(
-  //         collection(db, "products"),
-  //         where("published", "==", true),
-  //         orderBy("created_at", "desc")
-  //       );
-  //       const querySnapshot = await getDocs(q);
-  //       setProducts(querySnapshot.docs.map((doc) => doc.data() as Product));
-  //     };
-  //     getProducts();
-  //   }, []);
-
-  const products = await fetch("http://localhost:3000/api/products").then(
-    (res) => res.json() as Promise<Product[]>
-  );
+  const products = await fetch("http://localhost:3000/api/products", {
+    cache: "no-store",
+  }).then((res) => res.json() as Promise<Product[]>);
 
   return (
     <div className="overflow-x-auto">
-      <div className="min-w-screen min-h-screen bg-gray-100 text-gray-900 flex justify-center bg-gray-100 font-sans overflow-hidden">
+      <div className="min-w-screen min-h-screen bg-gray-100 text-gray-900 flex justify-center font-sans overflow-hidden">
         <div className="w-full lg:w-5/6">
           <div className="bg-white shadow-md rounded my-6">
             <table className="min-w-max w-full table-auto">
@@ -68,15 +50,24 @@ export default async function ProductsTable() {
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                           <RiEdit2Line />
                         </button>
-                        <button className="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
+                        {/* <button className="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
                           <RiDeleteBin2Line />
-                        </button>
+                        </button> */}
+                        <DeleteProductBtn productId={product.id} />
                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="flex justify-center p-4">
+            <Link
+              href="/admin/create"
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Agregar producto
+            </Link>
           </div>
         </div>
       </div>

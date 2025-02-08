@@ -8,7 +8,7 @@ import { collection, addDoc } from "firebase/firestore";
 export const CreateForm: React.FC = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("gorras");
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState("");
 
@@ -79,12 +79,15 @@ export const CreateForm: React.FC = () => {
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">
           Category:
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-          />
+          >
+            <option value="gorras">Gorras</option>
+            <option value="pantalones">Pantalones</option>
+            <option value="camisas">Camisas</option>
+          </select>
         </label>
       </div>
 
