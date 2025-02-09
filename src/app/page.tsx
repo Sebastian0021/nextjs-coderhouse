@@ -13,7 +13,7 @@ export const metadata = {
 
 export default async function Home() {
   const products = await fetch(
-    `http://${process.env.VERCEL_URL}}/api/products`
+    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}}/api/products`
   ).then((res) => res.json() as Promise<Product[]>);
   return (
     <main>

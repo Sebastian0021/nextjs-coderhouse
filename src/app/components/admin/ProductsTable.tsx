@@ -6,7 +6,7 @@ import DeleteProductBtn from "./DeleteProductBtn";
 
 export default async function ProductsTable() {
   const products = await fetch(
-    `http://${process.env.VERCEL_URL}}/api/products`,
+    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}}/api/products`,
     {
       cache: "no-store",
     }
