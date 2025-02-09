@@ -5,9 +5,12 @@ import Link from "next/link";
 import DeleteProductBtn from "./DeleteProductBtn";
 
 export default async function ProductsTable() {
-  const products = await fetch("http://localhost:3000/api/products", {
-    cache: "no-store",
-  }).then((res) => res.json() as Promise<Product[]>);
+  const products = await fetch(
+    `http://${process.env.VERCEL_URL}}/api/products`,
+    {
+      cache: "no-store",
+    }
+  ).then((res) => res.json() as Promise<Product[]>);
 
   return (
     <div className="overflow-x-auto">

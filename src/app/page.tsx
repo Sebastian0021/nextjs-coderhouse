@@ -12,9 +12,9 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const products = await fetch("http://localhost:3000/api/products").then(
-    (res) => res.json() as Promise<Product[]>
-  );
+  const products = await fetch(
+    `http://${process.env.VERCEL_URL}}/api/products`
+  ).then((res) => res.json() as Promise<Product[]>);
   return (
     <main>
       <Hero />

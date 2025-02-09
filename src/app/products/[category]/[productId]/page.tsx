@@ -11,7 +11,7 @@ const page = async ({
   const { productId, category } = await params;
 
   const product = await fetch(
-    `http://localhost:3000/api/products/${category}/${productId}`
+    `http://${process.env.VERCEL_URL}}/api/products/${category}/${productId}`
   ).then((res) => res.json());
 
   if (!product) {

@@ -11,7 +11,7 @@ const Caregory = async ({
   const { category } = await params;
 
   const products = await fetch(
-    `http://localhost:3000/api/products/${category}`
+    `http://${process.env.VERCEL_URL}}/api/products/${category}`
   ).then((res) => res.json() as Promise<Product[]>);
 
   return (

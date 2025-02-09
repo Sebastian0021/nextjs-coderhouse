@@ -36,7 +36,7 @@ const EditForm: React.FC<{ product: Product }> = ({ product }) => {
     formData.append("file", image);
 
     const response = await fetch(
-      "http://localhost:3000/api/cloudinary/upload",
+      `http://${process.env.VERCEL_URL}}/api/cloudinary/upload`,
       {
         method: "POST",
         body: formData,

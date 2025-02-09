@@ -10,9 +10,9 @@ export const metadata = {
 };
 
 const ProductsPage = async () => {
-  const products = await fetch("http://localhost:3000/api/products").then(
-    (res) => res.json() as Promise<Product[]>
-  );
+  const products = await fetch(
+    `http://${process.env.VERCEL_URL}}/api/products`
+  ).then((res) => res.json() as Promise<Product[]>);
 
   return (
     <div className="container mx-auto p-4 grid grid-cols-12 gap-4">
