@@ -39,7 +39,7 @@ export const CreateForm: React.FC = () => {
     formData.append("file", image);
 
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_VERCEL_URL}}/api/cloudinary/upload`,
+      `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/cloudinary/upload`,
       {
         method: "POST",
         body: formData,
