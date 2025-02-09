@@ -1,36 +1,33 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { db } from "@/firebase/config";
-import { collection, addDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
+import { updateDoc, doc } from "firebase/firestore";
+import { Product } from "@/types/product";
 
-// type CreateFormProps = {};
-
-export const CreateForm: React.FC = () => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("gorras");
+const EditForm: React.FC<{ product: Product }> = ({ product }) => {
+  const [name, setName] = useState(product.name);
+  const [price, setPrice] = useState(product.price);
+  const [category, setCategory] = useState(product.category);
   const [image, setImage] = useState<File | null>(null);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(product.description);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(image);
     try {
-      const imageData = image ? await uploadImage(image) : "";
-      const docRef = await addDoc(collection(db, "products"), {
+      await updateDoc(doc(db, "products", product.id), {
         name,
         price,
         category,
-        image: imageData,
+        image: image ? await uploadImage(image) : product.image,
         description,
       });
 
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Document written with ID: ", product.id);
       router.push("/admin");
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("Error updating document: ", e);
     }
   };
 
@@ -51,10 +48,7 @@ export const CreateForm: React.FC = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-lg mx-auto p-4 bg-white shadow-md rounded"
-    >
+    <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">
           Name:
@@ -120,8 +114,10 @@ export const CreateForm: React.FC = () => {
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Create
+        Edit
       </button>
     </form>
   );
 };
+
+export default EditForm;

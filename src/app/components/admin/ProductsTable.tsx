@@ -47,9 +47,12 @@ export default async function ProductsTable() {
                     <td className="py-3 px-6 text-left">{product.category}</td>
                     <td className="py-3 px-6 text-left">
                       <div className="flex item-center justify-center">
-                        <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <Link
+                          href={`/admin/edit/${product.category}/${product.id}`}
+                          className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                        >
                           <RiEdit2Line />
-                        </button>
+                        </Link>
                         {/* <button className="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
                           <RiDeleteBin2Line />
                         </button> */}
