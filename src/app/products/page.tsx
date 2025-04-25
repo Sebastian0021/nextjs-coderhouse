@@ -12,8 +12,9 @@ export const metadata = {
 
 const ProductsPage = async () => {
   let products: Product[] = [];
+const baseUrl = typeof window === "undefined" ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" : "";
 try {
-  const res = await fetch(`/api/products`);
+  const res = await fetch(`${baseUrl}/api/products`);
   if (!res.ok) throw new Error('Failed to fetch products');
   products = await res.json();
 } catch (error) {
@@ -21,6 +22,7 @@ try {
   console.error('Error fetching products:', error);
 }
 
+  console.log("PRODUCTS PRODUCTS:", products);
   return (
     <div className="container mx-auto p-4 grid grid-cols-12 gap-4">
       <ProductsAside currentCategory={"todos"} />

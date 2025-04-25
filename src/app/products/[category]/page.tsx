@@ -12,8 +12,9 @@ const Caregory = async ({
   const { category } = await params;
 
   let products: Product[] = [];
+const baseUrl = typeof window === "undefined" ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" : "";
 try {
-  const res = await fetch(`/api/products/${category}`);
+  const res = await fetch(`${baseUrl}/api/products/${category}`);
   if (!res.ok) throw new Error('Failed to fetch products');
   products = await res.json();
 } catch (error) {

@@ -7,8 +7,9 @@ import DeleteProductBtn from "./DeleteProductBtn";
 
 export default async function ProductsTable() {
   let products: Product[] = [];
+const baseUrl = typeof window === "undefined" ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" : "";
 try {
-  const res = await fetch(`/api/products`, { cache: "no-store" });
+  const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
   if (!res.ok) throw new Error('Failed to fetch products');
   products = await res.json();
 } catch (error) {
