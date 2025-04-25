@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import ProductsTable from "../components/admin/ProductsTable";
 import LogoutBtn from "../components/admin/LogoutBtn";
 

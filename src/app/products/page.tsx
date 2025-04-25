@@ -1,5 +1,6 @@
 import Products from "../components/Products";
 import { Product } from "@/types/product";
+export const dynamic = "force-dynamic";
 import ProductsAside from "../components/ProductsAside";
 // const prouctsKeyWords = products.map((product) => product.name);
 

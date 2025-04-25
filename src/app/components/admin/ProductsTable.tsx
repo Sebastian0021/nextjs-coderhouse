@@ -1,6 +1,7 @@
 import { Product } from "@/types/product";
 import Image from "next/image";
 import { RiEdit2Line } from "react-icons/ri";
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import DeleteProductBtn from "./DeleteProductBtn";
 

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import EditForm from "@/app/components/admin/edit/EditForm";
 
 const page = async ({
