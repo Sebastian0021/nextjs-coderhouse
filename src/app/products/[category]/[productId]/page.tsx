@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import Image from "next/image";
 // import Link from "next/link";
@@ -11,7 +12,7 @@ const page = async ({
   const { productId, category } = await params;
 
   const product = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}/${productId}`
+    `/api/products/${category}/${productId}`
   ).then((res) => res.json());
 
   if (!product) {

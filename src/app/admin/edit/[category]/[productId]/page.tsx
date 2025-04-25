@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import EditForm from "@/app/components/admin/edit/EditForm";
 
 const page = async ({
@@ -8,7 +9,7 @@ const page = async ({
   const { productId, category } = await params;
 
   const product = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}/${productId}`
+    `/api/products/${category}/${productId}`
   ).then((res) => res.json());
   console.log(product);
 

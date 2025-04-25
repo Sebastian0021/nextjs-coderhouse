@@ -2,15 +2,13 @@ import { Product } from "@/types/product";
 import Image from "next/image";
 import { RiEdit2Line } from "react-icons/ri";
 import Link from "next/link";
+export const dynamic = "force-dynamic";
 import DeleteProductBtn from "./DeleteProductBtn";
 
 export default async function ProductsTable() {
-  const products = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`,
-    {
-      cache: "no-store",
-    }
-  ).then((res) => res.json() as Promise<Product[]>);
+  const products = await fetch(`/api/products`, {
+    cache: "no-store",
+  }).then((res) => res.json() as Promise<Product[]>);
 
   return (
     <div className="overflow-x-auto">

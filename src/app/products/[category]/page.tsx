@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import ProductsAside from "@/app/components/ProductsAside";
 import Products from "../../components/Products";
 import { Product } from "@/types/product";
@@ -11,7 +12,7 @@ const Caregory = async ({
   const { category } = await params;
 
   const products = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}`
+    `/api/products/${category}`
   ).then((res) => res.json() as Promise<Product[]>);
 
   return (

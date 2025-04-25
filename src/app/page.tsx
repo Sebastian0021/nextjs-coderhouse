@@ -1,5 +1,6 @@
 // "use client";
 import Hero from "./components/Hero";
+export const dynamic = "force-dynamic";
 import Products from "./components/Products";
 import { Product } from "@/types/product";
 // import { db } from "@/firebase/config";
@@ -12,9 +13,9 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const products = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`
-  ).then((res) => res.json() as Promise<Product[]>);
+  const products = await fetch("/api/products").then(
+    (res) => res.json() as Promise<Product[]>
+  );
   return (
     <main>
       <Hero />

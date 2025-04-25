@@ -2,8 +2,6 @@
 import { useState } from "react";
 import { db } from "@/firebase/config";
 import { collection, addDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
-
 // type CreateFormProps = {};
 
 export const CreateForm: React.FC = () => {
@@ -12,7 +10,6 @@ export const CreateForm: React.FC = () => {
   const [category, setCategory] = useState("gorras");
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState("");
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +25,6 @@ export const CreateForm: React.FC = () => {
       });
 
       console.log("Document written with ID: ", docRef.id);
-      router.push("/admin");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -39,7 +35,7 @@ export const CreateForm: React.FC = () => {
     formData.append("file", image);
 
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/cloudinary/upload`,
+      `http://localhost:3000/api/cloudinary/upload`,
       {
         method: "POST",
         body: formData,

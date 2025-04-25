@@ -1,5 +1,6 @@
 import Products from "../components/Products";
 import { Product } from "@/types/product";
+export const dynamic = "force-dynamic";
 import ProductsAside from "../components/ProductsAside";
 // const prouctsKeyWords = products.map((product) => product.name);
 
@@ -10,9 +11,9 @@ export const metadata = {
 };
 
 const ProductsPage = async () => {
-  const products = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`
-  ).then((res) => res.json() as Promise<Product[]>);
+  const products = await fetch("/api/products").then(
+    (res) => res.json() as Promise<Product[]>
+  );
 
   return (
     <div className="container mx-auto p-4 grid grid-cols-12 gap-4">
