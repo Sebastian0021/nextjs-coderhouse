@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import ProductsAside from "@/app/components/ProductsAside";
 import Products from "../../components/Products";
 import { Product } from "@/types/product";
@@ -11,9 +10,15 @@ const Caregory = async ({
 }) => {
   const { category } = await params;
 
-  const products = await fetch(
-    `/api/products/${category}`
-  ).then((res) => res.json() as Promise<Product[]>);
+  let products: Product[] = [];
+try {
+  const res = await fetch(`/api/products/${category}`);
+  if (!res.ok) throw new Error('Failed to fetch products');
+  products = await res.json();
+} catch (error) {
+  // Puedes mostrar un mensaje de error o dejar el array vacío
+  console.error('Error fetching products:', error);
+}
 
   return (
     <div className="container mx-auto p-4 grid grid-cols-12 gap-4">

@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import EditForm from "@/app/components/admin/edit/EditForm";
 
 const page = async ({
@@ -8,9 +7,15 @@ const page = async ({
 }) => {
   const { productId, category } = await params;
 
-  const product = await fetch(
-    `/api/products/${category}/${productId}`
-  ).then((res) => res.json());
+  let product = null;
+try {
+  const res = await fetch(`/api/products/${category}/${productId}`);
+  if (!res.ok) throw new Error('Failed to fetch product');
+  product = await res.json();
+} catch (error) {
+  console.error('Error fetching product:', error);
+  // Puedes mostrar un mensaje de error o devolver null
+}
   console.log(product);
 
   if (!product) {

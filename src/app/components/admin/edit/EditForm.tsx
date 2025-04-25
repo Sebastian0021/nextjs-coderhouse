@@ -35,16 +35,21 @@ const EditForm: React.FC<{ product: Product }> = ({ product }) => {
     const formData = new FormData();
     formData.append("file", image);
 
-    const response = await fetch(
-      `/api/cloudinary/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    const file = await response.json();
-    return file.url;
+    let file = { url: "" };
+try {
+  const response = await fetch(
+    `/api/cloudinary/upload`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  if (!response.ok) throw new Error('Failed to upload image');
+  file = await response.json();
+} catch (error) {
+  console.error('Error uploading image:', error);
+}
+return file.url;
   };
 
   return (

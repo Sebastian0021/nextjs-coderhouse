@@ -2,13 +2,17 @@ import { Product } from "@/types/product";
 import Image from "next/image";
 import { RiEdit2Line } from "react-icons/ri";
 import Link from "next/link";
-export const dynamic = "force-dynamic";
 import DeleteProductBtn from "./DeleteProductBtn";
 
 export default async function ProductsTable() {
-  const products = await fetch(`/api/products`, {
-    cache: "no-store",
-  }).then((res) => res.json() as Promise<Product[]>);
+  let products: Product[] = [];
+try {
+  const res = await fetch(`/api/products`, { cache: "no-store" });
+  if (!res.ok) throw new Error('Failed to fetch products');
+  products = await res.json();
+} catch (error) {
+  console.error('Error fetching products:', error);
+}
 
   return (
     <div className="overflow-x-auto">

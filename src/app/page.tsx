@@ -1,6 +1,5 @@
 // "use client";
 import Hero from "./components/Hero";
-export const dynamic = "force-dynamic";
 import Products from "./components/Products";
 import { Product } from "@/types/product";
 // import { db } from "@/firebase/config";
@@ -13,9 +12,15 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const products = await fetch("/api/products").then(
-    (res) => res.json() as Promise<Product[]>
-  );
+  let products: Product[] = [];
+try {
+  const res = await fetch(`/api/products`);
+  if (!res.ok) throw new Error('Failed to fetch products');
+  products = await res.json();
+} catch (error) {
+  // Puedes mostrar un mensaje de error o dejar el array vacío
+  console.error('Error fetching products:', error);
+}
   return (
     <main>
       <Hero />
